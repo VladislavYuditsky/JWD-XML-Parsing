@@ -5,6 +5,8 @@ import com.yuditsky.xmlparsing.builder.FlowersBuilder;
 import com.yuditsky.xmlparsing.entity.Flower;
 import com.yuditsky.xmlparsing.entity.GrowingTipc;
 import com.yuditsky.xmlparsing.entity.VisualParam;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -16,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class FlowersStAXBuilder extends FlowersBuilder {
+    private final static Logger logger = LogManager.getLogger(FlowersStAXBuilder.class);
     private XMLInputFactory inputFactory;
 
     public FlowersStAXBuilder() {
@@ -27,7 +30,7 @@ public class FlowersStAXBuilder extends FlowersBuilder {
         XMLStreamReader reader;
         String name;
 
-        try(FileInputStream inputStream = new FileInputStream(new File(fileName))){
+        try (FileInputStream inputStream = new FileInputStream(new File(fileName))) {
             reader = inputFactory.createXMLStreamReader(inputStream);
             while (reader.hasNext()) {
                 int type = reader.next();
@@ -39,12 +42,12 @@ public class FlowersStAXBuilder extends FlowersBuilder {
                     }
                 }
             }
-        } catch (XMLStreamException ex) {
-            //System.err.println("StAX parsing error! " + ex.getMessage());
-        } catch (FileNotFoundException ex) {
-            //System.err.println("File " + fileName + " not found! " + ex);
+        } catch (XMLStreamException e) {
+            logger.error("StAX parsing error! " + e.getMessage(), e);
+        } catch (FileNotFoundException e) {
+            logger.error("File " + fileName + " not found! " + e.getMessage(), e);
         } catch (IOException e) {
-           // e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -59,14 +62,14 @@ public class FlowersStAXBuilder extends FlowersBuilder {
         flower.setSpecies(param);
 
         param = reader.getAttributeValue(null, FlowerParam.FAMILY.getValue());
-        if(param != null){
+        if (param != null) {
             flower.setFamily(param);
         } else {
             flower.setFamily("");
         }
 
         param = reader.getAttributeValue(null, FlowerParam.CLASS.getValue());
-        if(param != null){
+        if (param != null) {
             flower.setClazz(param);
         } else {
             flower.setClazz("");
@@ -92,8 +95,6 @@ public class FlowersStAXBuilder extends FlowersBuilder {
                             break;
                         case MULTIPLYING:
                             flower.setMultiplying(getXMLText(reader));
-                        default:
-                            ///
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
@@ -102,8 +103,6 @@ public class FlowersStAXBuilder extends FlowersBuilder {
                         return flower;
                     }
                     break;
-                default:
-                    ///
             }
         }
         throw new XMLStreamException("Unknown element in tag Flower");
@@ -132,7 +131,7 @@ public class FlowersStAXBuilder extends FlowersBuilder {
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
-                    if (FlowerParam.valueOf(name.toUpperCase()) == FlowerParam.GROWING_TIPC){
+                    if (FlowerParam.valueOf(name.toUpperCase()) == FlowerParam.GROWING_TIPC) {
                         return growingTipc;
                     }
                     break;
@@ -164,7 +163,7 @@ public class FlowersStAXBuilder extends FlowersBuilder {
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
-                    if (FlowerParam.valueOf(name.toUpperCase()) == FlowerParam.VISUAL_PARAM){
+                    if (FlowerParam.valueOf(name.toUpperCase()) == FlowerParam.VISUAL_PARAM) {
                         return visualParam;
                     }
                     break;

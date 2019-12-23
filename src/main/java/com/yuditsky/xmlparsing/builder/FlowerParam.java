@@ -24,6 +24,7 @@ public enum FlowerParam {
     FlowerParam(String value) {
         this.value = value;
     }
+
     public String getValue() {
         return value;
     }

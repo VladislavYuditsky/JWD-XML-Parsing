@@ -5,7 +5,9 @@ import com.yuditsky.xmlparsing.entity.Flower;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 
 public class FlowerHandler extends DefaultHandler {
     private List<Flower> flowers;
@@ -30,21 +32,21 @@ public class FlowerHandler extends DefaultHandler {
 
             String param;
             param = attrs.getValue("family");
-            if(param!=null){
+            if (param != null) {
                 flower.setFamily(param);
             } else {
                 flower.setFamily("");
             }
 
             param = attrs.getValue("class");
-            if(param!=null){
+            if (param != null) {
                 flower.setClazz(param);
             } else {
                 flower.setClazz("");
             }
         } else {
             FlowerParam temp = FlowerParam.valueOf(localName.toUpperCase());
-            if(paramRange.contains(temp)) {
+            if (paramRange.contains(temp)) {
                 flowerParam = temp;
             }
         }

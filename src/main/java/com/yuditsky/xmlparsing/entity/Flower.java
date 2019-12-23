@@ -31,32 +31,16 @@ public class Flower {
         this.multiplying = multiplying;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getSpecies() {
-        return species;
     }
 
     public void setSpecies(String species) {
         this.species = species;
     }
 
-    public String getClazz() {
-        return clazz;
-    }
-
     public void setClazz(String clazz) {
         this.clazz = clazz;
-    }
-
-    public String getFamily() {
-        return family;
     }
 
     public void setFamily(String family) {

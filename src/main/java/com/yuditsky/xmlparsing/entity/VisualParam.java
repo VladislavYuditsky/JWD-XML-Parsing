@@ -16,24 +16,12 @@ public class VisualParam {
         this.averageSize = averageSize;
     }
 
-    public String getStemColor() {
-        return stemColor;
-    }
-
     public void setStemColor(String stemColor) {
         this.stemColor = stemColor;
     }
 
-    public String getLeafColor() {
-        return leafColor;
-    }
-
     public void setLeafColor(String leafColor) {
         this.leafColor = leafColor;
-    }
-
-    public long getAverageSize() {
-        return averageSize;
     }
 
     public void setAverageSize(long averageSize) {

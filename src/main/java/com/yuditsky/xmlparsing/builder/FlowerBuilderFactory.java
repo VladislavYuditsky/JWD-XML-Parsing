@@ -19,7 +19,7 @@ public class FlowerBuilderFactory {
             case SAX:
                 return new FlowersSAXBuilder();
             default:
-                throw new EnumConstantNotPresentException (type.getDeclaringClass(), type.name());
+                throw new EnumConstantNotPresentException(type.getDeclaringClass(), type.name());
         }
     }
 }

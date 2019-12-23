@@ -4,6 +4,8 @@ import com.yuditsky.xmlparsing.builder.FlowersBuilder;
 import com.yuditsky.xmlparsing.entity.Flower;
 import com.yuditsky.xmlparsing.entity.GrowingTipc;
 import com.yuditsky.xmlparsing.entity.VisualParam;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,9 +16,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.Set;
 
 public class FlowersDOMBuilder extends FlowersBuilder {
+    private final static Logger logger = LogManager.getLogger(FlowersDOMBuilder.class);
     private DocumentBuilder documentBuilder;
 
     public FlowersDOMBuilder() {
@@ -24,7 +26,7 @@ public class FlowersDOMBuilder extends FlowersBuilder {
         try {
             documentBuilder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            //System.err.println("Ошибка конфигурации парсера: " + e);
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -32,10 +34,8 @@ public class FlowersDOMBuilder extends FlowersBuilder {
     public void buildSetFlowers(String fileName) {
         Document document;
         try {
-            // parsing XML-документа и создание древовидной структуры
             document = documentBuilder.parse(fileName);
             Element root = document.getDocumentElement();
-            // получение списка дочерних элементов <student>
             NodeList flowersList = root.getElementsByTagName("flower");
             for (int i = 0; i < flowersList.getLength(); i++) {
                 Element flowerElement = (Element) flowersList.item(i);
@@ -43,9 +43,9 @@ public class FlowersDOMBuilder extends FlowersBuilder {
                 flowers.add(flower);
             }
         } catch (IOException e) {
-            //System.err.println("File error or I/O error: " + e);
+            logger.error(e.getMessage(), e);
         } catch (SAXException e) {
-            //System.err.println("Parsing failure: " + e);
+            logger.error(e.getMessage(), e);
         }
     }
 
