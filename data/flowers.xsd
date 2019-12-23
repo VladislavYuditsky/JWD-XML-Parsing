@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.yuditsky.com/flowers"
+        xmlns:tns="http://www.yuditsky.com/flowers"
+        elementFormDefault="qualified">
+
+    <element name="flower" type="tns:Flower"/>
+
+    <element name="flowers">
+        <complexType>
+            <sequence>
+                <element ref="tns:flower"
+                         minOccurs="2"
+                         maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="Flower">
+        <sequence>
+            <element name="soil" type="tns:Soil" default="podzolic"/>
+            <element name="origin" type="string"/>
+            <element name="growing_tipc" type="tns:GrowingTipc"/>
+            <element name="visual_param" type="tns:VisualParam"/>
+            <element name="multiplying" type="tns:Multiplying"/>
+        </sequence>
+        <attribute name="id" type="ID" use="required"/>
+        <attribute name="species" type="string" use="required" default="noname"/>
+        <attribute name="class" type="string" use="optional"/>
+        <attribute name="family" type="string" use="optional"/>
+    </complexType>
+
+    <simpleType name="Soil">
+        <restriction base="string">
+            <enumeration value="podzolic"/>
+            <enumeration value="unpaved"/>
+            <enumeration value="sod-podzolic"/>
+        </restriction>
+    </simpleType>
+
+    <complexType name="GrowingTipc">
+        <sequence>
+            <element name="temperature" type="int"/>
+            <element name="photophilous" type="boolean"/>
+            <element name="watering" type="unsignedInt"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="VisualParam">
+        <sequence>
+            <element name="stem_color" type="string"/>
+            <element name="leaf_color" type="string"/>
+            <element name="average_size" type="unsignedInt"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="Multiplying">
+        <restriction base="string">
+            <enumeration value="leaf"/>
+            <enumeration value="seed"/>
+            <enumeration value="cutting"/>
+            <enumeration value="bulb"/>
+        </restriction>
+    </simpleType>
+</schema>

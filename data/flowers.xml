@@ -1,0 +1,84 @@
+<flowers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://www.yuditsky.com/flowers"
+         xsi:schemaLocation="http://www.yuditsky.com/flowers ../data/flowers.xsd">
+
+    <flower id="ID-1" species="Currant">
+        <soil>podzolic</soil>
+        <origin>Eurasia</origin>
+        <growing_tipc>
+            <temperature>20</temperature>
+            <photophilous>true</photophilous>
+            <watering>500</watering>
+        </growing_tipc>
+        <visual_param>
+            <stem_color>green</stem_color>
+            <leaf_color>green</leaf_color>
+            <average_size>150</average_size>
+        </visual_param>
+        <multiplying>cutting</multiplying>
+    </flower>
+
+    <flower id="ID-2" species="Tulip">
+        <soil>unpaved</soil>
+        <origin>Iran</origin>
+        <growing_tipc>
+            <temperature>20</temperature>
+            <photophilous>true</photophilous>
+            <watering>300</watering>
+        </growing_tipc>
+        <visual_param>
+            <stem_color>green</stem_color>
+            <leaf_color>green</leaf_color>
+            <average_size>40</average_size>
+        </visual_param>
+        <multiplying>bulb</multiplying>
+    </flower>
+
+    <flower id="ID-3" species="chamomile" class="dicotyledonous" family="aster">
+        <soil>sod-podzolic</soil>
+        <origin>Eurasia</origin>
+        <growing_tipc>
+            <temperature>17</temperature>
+            <photophilous>true</photophilous>
+            <watering>150</watering>
+        </growing_tipc>
+        <visual_param>
+            <stem_color>green</stem_color>
+            <leaf_color>green</leaf_color>
+            <average_size>10</average_size>
+        </visual_param>
+        <multiplying>seed</multiplying>
+    </flower>
+
+    <flower id="ID-4" species="Vasileck" class="dicotyledonous">
+        <soil>podzolic</soil>
+        <origin>Europe</origin>
+        <growing_tipc>
+            <temperature>12</temperature>
+            <photophilous>true</photophilous>
+            <watering>100</watering>
+        </growing_tipc>
+        <visual_param>
+            <stem_color>green</stem_color>
+            <leaf_color>green</leaf_color>
+            <average_size>10</average_size>
+        </visual_param>
+        <multiplying>seed</multiplying>
+    </flower>
+
+    <flower id="ID-5" species="">
+        <soil>podzolic</soil>
+        <origin>1</origin>
+        <growing_tipc>
+            <temperature>1</temperature>
+            <photophilous>1</photophilous>
+            <watering>1</watering>
+        </growing_tipc>
+        <visual_param>
+            <stem_color>1</stem_color>
+            <leaf_color>1</leaf_color>
+            <average_size>1</average_size>
+        </visual_param>
+        <multiplying>leaf</multiplying>
+    </flower>
+</flowers>
