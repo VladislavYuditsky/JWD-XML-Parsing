@@ -1,7 +1,6 @@
 package com.yuditsky.xmlparsing.builder;
 
 public enum FlowerParam {
-    FLOWERS("flowers"),
     FLOWER("flower"),
     ID("id"),
     SPECIES("species"),

@@ -3,41 +3,39 @@ package com.yuditsky.xmlparsing.entity;
 import java.util.Objects;
 
 public class GrowingTipc {
-    private int temperature;
-    private boolean photophilous;
-    private long watering;
+    private final int temperature;
+    private final boolean photophilous;
+    private final long watering;
 
-    public GrowingTipc() {
-    }
+    public static class Builder {
+        private int temperature;
+        private boolean photophilous;
+        private long watering;
 
-    public GrowingTipc(int temperature, boolean photophilous, long watering) {
-        this.temperature = temperature;
-        this.photophilous = photophilous;
-        this.watering = watering;
-    }
+        public Builder() {
+        }
 
-    public int getTemperature() {
-        return temperature;
-    }
+        public Builder(int temperature, boolean photophilous, long watering) {
+            this.temperature = temperature;
+            this.photophilous = photophilous;
+            this.watering = watering;
+        }
 
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
-    }
+        public void withTemperature(int temperature) {
+            this.temperature = temperature;
+        }
 
-    public boolean isPhotophilous() {
-        return photophilous;
-    }
+        public void withPhotophilous(boolean photophilous) {
+            this.photophilous = photophilous;
+        }
 
-    public void setPhotophilous(boolean photophilous) {
-        this.photophilous = photophilous;
-    }
+        public void withWatering(long watering) {
+            this.watering = watering;
+        }
 
-    public long getWatering() {
-        return watering;
-    }
-
-    public void setWatering(long watering) {
-        this.watering = watering;
+        public GrowingTipc build() {
+            return new GrowingTipc(this);
+        }
     }
 
     @Override
@@ -53,5 +51,11 @@ public class GrowingTipc {
     @Override
     public int hashCode() {
         return Objects.hash(temperature, photophilous, watering);
+    }
+
+    private GrowingTipc(Builder builder) {
+        temperature = builder.temperature;
+        photophilous = builder.photophilous;
+        watering = builder.watering;
     }
 }

@@ -16,5 +16,5 @@ public abstract class FlowersBuilder {
         return flowers;
     }
 
-    abstract public void buildSetFlowers(String fileName);
+    abstract public void buildFlowers(String fileName);
 }

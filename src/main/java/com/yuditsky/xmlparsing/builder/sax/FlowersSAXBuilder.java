@@ -25,7 +25,7 @@ public class FlowersSAXBuilder extends FlowersBuilder {
     }
 
     @Override
-    public void buildSetFlowers(String fileName) {
+    public void buildFlowers(String fileName) {
         try {
             reader.parse(fileName);
         } catch (SAXException e) {

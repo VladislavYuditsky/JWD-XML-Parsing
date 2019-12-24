@@ -26,7 +26,7 @@ public class FlowersStAXBuilder extends FlowersBuilder {
     }
 
     @Override
-    public void buildSetFlowers(String fileName) {
+    public void buildFlowers(String fileName) {
         XMLStreamReader reader;
         String name;
 
@@ -52,27 +52,23 @@ public class FlowersStAXBuilder extends FlowersBuilder {
     }
 
     private Flower buildFlower(XMLStreamReader reader) throws XMLStreamException {
-        Flower flower = new Flower();
+        Flower.Builder builder = new Flower.Builder();
         String param;
 
         param = reader.getAttributeValue(null, FlowerParam.ID.getValue());
-        flower.setId(param);
+        builder.withId(param);
 
         param = reader.getAttributeValue(null, FlowerParam.SPECIES.getValue());
-        flower.setSpecies(param);
+        builder.withSpecies(param);
 
         param = reader.getAttributeValue(null, FlowerParam.FAMILY.getValue());
         if (param != null) {
-            flower.setFamily(param);
-        } else {
-            flower.setFamily("");
+            builder.withFamily(param);
         }
 
         param = reader.getAttributeValue(null, FlowerParam.CLASS.getValue());
         if (param != null) {
-            flower.setClazz(param);
-        } else {
-            flower.setClazz("");
+            builder.withClazz(param);
         }
 
         while (reader.hasNext()) {
@@ -82,25 +78,25 @@ public class FlowersStAXBuilder extends FlowersBuilder {
                     param = reader.getLocalName();
                     switch (FlowerParam.valueOf(param.toUpperCase())) {
                         case SOIL:
-                            flower.setSoil(getXMLText(reader));
+                            builder.withSoil(getXMLText(reader));
                             break;
                         case ORIGIN:
-                            flower.setOrigin(getXMLText(reader));
+                            builder.withOrigin(getXMLText(reader));
                             break;
                         case GROWING_TIPC:
-                            flower.setGrowingTipc(getXMLGrowingTipc(reader));
+                            builder.withGrowingTipc(getXMLGrowingTipc(reader));
                             break;
                         case VISUAL_PARAM:
-                            flower.setVisualParam(getXMLVisualParam(reader));
+                            builder.withVisualParam(getXMLVisualParam(reader));
                             break;
                         case MULTIPLYING:
-                            flower.setMultiplying(getXMLText(reader));
+                            builder.withMultiplying(getXMLText(reader));
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     param = reader.getLocalName();
                     if (FlowerParam.valueOf(param.toUpperCase()) == FlowerParam.FLOWER) {
-                        return flower;
+                        return builder.build();
                     }
                     break;
             }
@@ -109,7 +105,7 @@ public class FlowersStAXBuilder extends FlowersBuilder {
     }
 
     private GrowingTipc getXMLGrowingTipc(XMLStreamReader reader) throws XMLStreamException {
-        GrowingTipc growingTipc = new GrowingTipc();
+        GrowingTipc.Builder builder = new GrowingTipc.Builder();
         int type;
         String name;
         while (reader.hasNext()) {
@@ -119,20 +115,20 @@ public class FlowersStAXBuilder extends FlowersBuilder {
                     name = reader.getLocalName();
                     switch (FlowerParam.valueOf(name.toUpperCase())) {
                         case TEMPERATURE:
-                            growingTipc.setTemperature(Integer.parseInt(getXMLText(reader)));
+                            builder.withTemperature(Integer.parseInt(getXMLText(reader)));
                             break;
                         case PHOTOPHILOUS:
-                            growingTipc.setPhotophilous(Boolean.parseBoolean(getXMLText(reader)));
+                            builder.withPhotophilous(Boolean.parseBoolean(getXMLText(reader)));
                             break;
                         case WATERING:
-                            growingTipc.setWatering(Long.parseLong(getXMLText(reader)));
+                            builder.withWatering(Long.parseLong(getXMLText(reader)));
                             break;
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
                     if (FlowerParam.valueOf(name.toUpperCase()) == FlowerParam.GROWING_TIPC) {
-                        return growingTipc;
+                        return builder.build();
                     }
                     break;
             }
@@ -141,7 +137,7 @@ public class FlowersStAXBuilder extends FlowersBuilder {
     }
 
     private VisualParam getXMLVisualParam(XMLStreamReader reader) throws XMLStreamException {
-        VisualParam visualParam = new VisualParam();
+        VisualParam.Builder builder = new VisualParam.Builder();
         int type;
         String name;
         while (reader.hasNext()) {
@@ -151,20 +147,20 @@ public class FlowersStAXBuilder extends FlowersBuilder {
                     name = reader.getLocalName();
                     switch (FlowerParam.valueOf(name.toUpperCase())) {
                         case STEM_COLOR:
-                            visualParam.setStemColor(getXMLText(reader));
+                            builder.withStemColor(getXMLText(reader));
                             break;
                         case LEAF_COLOR:
-                            visualParam.setLeafColor(getXMLText(reader));
+                            builder.withLeafColor(getXMLText(reader));
                             break;
                         case AVERAGE_SIZE:
-                            visualParam.setAverageSize(Long.parseLong(getXMLText(reader)));
+                            builder.withAverageSize(Long.parseLong(getXMLText(reader)));
                             break;
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
                     if (FlowerParam.valueOf(name.toUpperCase()) == FlowerParam.VISUAL_PARAM) {
-                        return visualParam;
+                        return builder.build();
                     }
                     break;
             }

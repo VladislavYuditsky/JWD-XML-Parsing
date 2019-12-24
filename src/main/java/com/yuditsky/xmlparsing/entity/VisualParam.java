@@ -3,29 +3,39 @@ package com.yuditsky.xmlparsing.entity;
 import java.util.Objects;
 
 public class VisualParam {
-    private String stemColor;
-    private String leafColor;
-    private long averageSize;
+    private final String stemColor;
+    private final String leafColor;
+    private final long averageSize;
 
-    public VisualParam() {
-    }
+    public static class Builder {
+        private String stemColor;
+        private String leafColor;
+        private long averageSize;
 
-    public VisualParam(String stemColor, String leafColor, long averageSize) {
-        this.stemColor = stemColor;
-        this.leafColor = leafColor;
-        this.averageSize = averageSize;
-    }
+        public Builder() {
+        }
 
-    public void setStemColor(String stemColor) {
-        this.stemColor = stemColor;
-    }
+        public Builder(String stemColor, String leafColor, long averageSize) {
+            this.stemColor = stemColor;
+            this.leafColor = leafColor;
+            this.averageSize = averageSize;
+        }
 
-    public void setLeafColor(String leafColor) {
-        this.leafColor = leafColor;
-    }
+        public void withStemColor(String stemColor) {
+            this.stemColor = stemColor;
+        }
 
-    public void setAverageSize(long averageSize) {
-        this.averageSize = averageSize;
+        public void withLeafColor(String leafColor) {
+            this.leafColor = leafColor;
+        }
+
+        public void withAverageSize(long averageSize) {
+            this.averageSize = averageSize;
+        }
+
+        public VisualParam build() {
+            return new VisualParam(this);
+        }
     }
 
     @Override
@@ -41,5 +51,11 @@ public class VisualParam {
     @Override
     public int hashCode() {
         return Objects.hash(stemColor, leafColor, averageSize);
+    }
+
+    private VisualParam(Builder builder) {
+        stemColor = builder.stemColor;
+        leafColor = builder.leafColor;
+        averageSize = builder.averageSize;
     }
 }

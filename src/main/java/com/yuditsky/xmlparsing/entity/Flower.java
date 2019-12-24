@@ -3,88 +3,96 @@ package com.yuditsky.xmlparsing.entity;
 import java.util.Objects;
 
 public class Flower {
-    private String id;
-    private String species;
-    private String clazz;
-    private String family;
-    private String soil;
-    private String origin;
-    private GrowingTipc growingTipc;
-    private VisualParam visualParam;
-    private String multiplying;
+    private final String id;
+    private final String species;
+    private final String clazz;
+    private final String family;
+    private final String soil;
+    private final String origin;
+    private final GrowingTipc growingTipc;
+    private final VisualParam visualParam;
+    private final String multiplying;
 
-    public Flower() {
-        growingTipc = new GrowingTipc();
-        visualParam = new VisualParam();
-    }
+    public static class Builder {
+        private String id;
+        private String species;
+        private String soil;
+        private String origin;
+        private GrowingTipc growingTipc;
+        private VisualParam visualParam;
+        private String multiplying;
 
-    public Flower(String id, String species, String clazz, String family, String soil,
-                  String origin, GrowingTipc growingTipc, VisualParam visualParam, String multiplying) {
-        this.id = id;
-        this.species = species;
-        this.clazz = clazz;
-        this.family = family;
-        this.soil = soil;
-        this.origin = origin;
-        this.growingTipc = growingTipc;
-        this.visualParam = visualParam;
-        this.multiplying = multiplying;
-    }
+        private String clazz = "";
+        private String family = "";
 
-    public void setId(String id) {
-        this.id = id;
-    }
+        public Builder() {
+        }
 
-    public void setSpecies(String species) {
-        this.species = species;
-    }
+        public Builder(String id, String species, String clazz, String family, String soil, String origin,
+                       GrowingTipc growingTipc, VisualParam visualParam, String multiplying) {
+            this.id = id;
+            this.species = species;
+            this.soil = soil;
+            this.origin = origin;
+            this.growingTipc = growingTipc;
+            this.visualParam = visualParam;
+            this.multiplying = multiplying;
+            this.clazz = clazz;
+            this.family = family;
+        }
 
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
-    }
+        public Builder(String id, String species, String soil, String origin, GrowingTipc growingTipc,
+                       VisualParam visualParam, String multiplying) {
+            this.id = id;
+            this.species = species;
+            this.soil = soil;
+            this.origin = origin;
+            this.growingTipc = growingTipc;
+            this.visualParam = visualParam;
+            this.multiplying = multiplying;
+        }
 
-    public void setFamily(String family) {
-        this.family = family;
-    }
+        public void withId(String id) {
+            this.id = id;
+        }
 
-    public String getSoil() {
-        return soil;
-    }
+        public void withSpecies(String species) {
+            this.species = species;
+        }
 
-    public void setSoil(String soil) {
-        this.soil = soil;
-    }
+        public void withSoil(String soil) {
+            this.soil = soil;
+        }
 
-    public String getOrigin() {
-        return origin;
-    }
+        public void withOrigin(String origin) {
+            this.origin = origin;
+        }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
+        public void withGrowingTipc(GrowingTipc growingTipc) {
+            this.growingTipc = growingTipc;
+        }
 
-    public GrowingTipc getGrowingTipc() {
-        return growingTipc;
-    }
+        public void withVisualParam(VisualParam visualParam) {
+            this.visualParam = visualParam;
+        }
 
-    public void setGrowingTipc(GrowingTipc growingTipc) {
-        this.growingTipc = growingTipc;
-    }
+        public void withMultiplying(String multiplying) {
+            this.multiplying = multiplying;
+        }
 
-    public VisualParam getVisualParam() {
-        return visualParam;
-    }
+        public Builder withClazz(String clazz) {
+            this.clazz = clazz;
+            return this;
+        }
 
-    public void setVisualParam(VisualParam visualParam) {
-        this.visualParam = visualParam;
-    }
+        public Builder withFamily(String family) {
+            this.family = family;
+            return this;
+        }
 
-    public String getMultiplying() {
-        return multiplying;
-    }
-
-    public void setMultiplying(String multiplying) {
-        this.multiplying = multiplying;
+        public Flower build() {
+            return new Flower(this);
+        }
     }
 
     @Override
@@ -106,5 +114,17 @@ public class Flower {
     @Override
     public int hashCode() {
         return Objects.hash(id, species, clazz, family, soil, origin, growingTipc, visualParam, multiplying);
+    }
+
+    private Flower(Builder builder) {
+        id = builder.id;
+        species = builder.species;
+        clazz = builder.clazz;
+        family = builder.family;
+        soil = builder.soil;
+        origin = builder.origin;
+        growingTipc = builder.growingTipc;
+        visualParam = builder.visualParam;
+        multiplying = builder.multiplying;
     }
 }
